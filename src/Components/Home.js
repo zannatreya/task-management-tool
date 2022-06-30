@@ -1,18 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from "axios";
-import { format } from 'date-fns';
-import './App.css';
-import Item from './Components/Item'
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/dist/style.css';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import '../App.css';
 
-function App() {
+import Item from './Item';
 
-  const [text, setText] = useState("");
+const Home = () => {
+    const [text, setText] = useState("");
   const [todo, setTodo] = useState([]);
   const [isUpdating, setUpdating] = useState("");
-  const [selected, setSelected] = useState("");
- 
 
   useEffect(() => {
     axios.get("http://localhost:5000/get-todo")
@@ -50,11 +45,9 @@ function App() {
     setUpdating(_id);
     setText(text);
   }
-
-  return (
-    <div>
-      <div className="container">
-        <h1 className='text-4xl font-bold mt-16 mb-8'>ToDo App</h1>
+    return (
+<div className="container">
+        <h1>ToDo App</h1>
         <div className="top">
           <input
             type="text"
@@ -72,18 +65,9 @@ function App() {
             remove={() => deleteTodo(item._id)}
             update={() => updateTodo(item._id, item.text)} />)}
         </div>
-        <div>
-          <h1 className='text-4xl font-bold mt-16 mb-8'>Calendar</h1>
-                    <DayPicker
-                        mode="single"
-                        selected={selected}
-                        onSelect={setSelected}
-                    
-                    />
-                </div>
-      </div>
-    </div>
-  );
-}
 
-export default App;
+      </div>
+    );
+};
+
+export default Home;

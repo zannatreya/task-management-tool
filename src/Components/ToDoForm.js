@@ -47,7 +47,7 @@ function ToDoForm() {
         if(!editTodoData){
             await axios.post(link, todoData)
         }else{
-            //Update the data if we do have the ediTodoData
+            //Update the data if we do have the ediTodoData 
             await axios.patch(`http://localhost:5000/api/v1/crud/${editTodoData._id}`, todoData)
         }
 
